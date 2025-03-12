@@ -8,6 +8,7 @@ interface CTAButtonProps {
   className?: string;
   variant?: 'primary' | 'secondary';
   href?: string;
+  style?: React.CSSProperties;
 }
 
 const CTAButton = ({ 
@@ -15,7 +16,8 @@ const CTAButton = ({
   onClick, 
   className, 
   variant = 'primary',
-  href 
+  href,
+  style
 }: CTAButtonProps) => {
   const baseClasses = "py-3 px-6 rounded-lg font-medium transition-all duration-300 inline-block text-center";
   
@@ -36,6 +38,7 @@ const CTAButton = ({
         href={href}
         className={cn(baseClasses, variantClasses[variant], className)}
         onClick={onClick}
+        style={style}
       >
         {buttonContent}
       </a>
@@ -46,6 +49,7 @@ const CTAButton = ({
     <button 
       className={cn(baseClasses, variantClasses[variant], className)}
       onClick={onClick}
+      style={style}
     >
       {buttonContent}
     </button>

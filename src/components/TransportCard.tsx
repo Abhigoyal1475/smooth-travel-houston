@@ -7,9 +7,10 @@ interface TransportCardProps {
   icon: React.ReactNode;
   onClick?: () => void;
   className?: string;
+  style?: React.CSSProperties;
 }
 
-const TransportCard = ({ title, icon, onClick, className }: TransportCardProps) => {
+const TransportCard = ({ title, icon, onClick, className, style }: TransportCardProps) => {
   return (
     <div 
       className={cn(
@@ -17,6 +18,7 @@ const TransportCard = ({ title, icon, onClick, className }: TransportCardProps) 
         className
       )}
       onClick={onClick}
+      style={style}
     >
       <div className="text-3xl text-blue-500 mb-3">
         {icon}
