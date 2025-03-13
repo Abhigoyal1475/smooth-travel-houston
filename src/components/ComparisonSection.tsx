@@ -44,11 +44,16 @@ const ComparisonSection = () => {
   ];
 
   return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8">
+    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-blue-50 to-purple-50">
       <div className="container mx-auto max-w-6xl">
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-12">
-          Transportation Comparison
-        </h2>
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold text-gray-800 mb-4">
+            Transportation Comparison
+          </h2>
+          <p className="text-gray-600 max-w-2xl mx-auto">
+            Compare your options at a glance to find the best transportation method for your needs.
+          </p>
+        </div>
         <ComparisonTable data={comparisonData} />
       </div>
     </section>

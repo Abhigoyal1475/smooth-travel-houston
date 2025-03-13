@@ -17,24 +17,26 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       <HeroSection onExploreClick={scrollToTransportOptions} />
       
       {/* Ad banner after hero section */}
-      <GoogleAdBanner className="py-4" />
+      <GoogleAdBanner />
       
-      <TransportOptionsSection sectionRef={transportOptionsRef} />
-      <DetailedGuidesSection />
-      
-      {/* Ad banner between content sections */}
-      <GoogleAdBanner className="py-4 bg-gray-100" />
-      
-      <ComparisonSection />
-      <FaqSection />
-      <CtaSection />
-      
-      {/* Ad banner before footer */}
-      <GoogleAdBanner className="py-4" />
+      <div id="content" className="relative z-10">
+        <TransportOptionsSection sectionRef={transportOptionsRef} />
+        <DetailedGuidesSection />
+        
+        {/* Ad banner between content sections */}
+        <GoogleAdBanner className="bg-blue-50" />
+        
+        <ComparisonSection />
+        <FaqSection />
+        <CtaSection />
+        
+        {/* Ad banner before footer */}
+        <GoogleAdBanner />
+      </div>
       
       <FooterSection />
     </div>
