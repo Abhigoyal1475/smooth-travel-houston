@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { Bus, Car, Bike, MapPin, Plane, DollarSign, ArrowRight, Compass } from 'lucide-react';
 import { cn } from "@/lib/utils";
@@ -180,7 +179,6 @@ const TransportOptionsSection = ({ sectionRef }: TransportOptionsSectionProps) =
     setSelectedTransport(transport);
     setActiveTransportId(transport.id!);
     
-    // Scroll to the content area on mobile
     if (isMobile && contentRef.current) {
       contentRef.current.scrollIntoView({ behavior: 'smooth' });
     }
@@ -199,77 +197,73 @@ const TransportOptionsSection = ({ sectionRef }: TransportOptionsSectionProps) =
           Discover the most convenient ways to get around Houston as a student
         </p>
         
-        <SidebarProvider defaultOpen={!isMobile}>
-          <div className="min-h-full flex flex-col md:flex-row w-full bg-white rounded-lg shadow-md overflow-hidden">
-            {/* Sidebar with transportation options list */}
-            <Sidebar 
-              collapsible={isMobile ? "offcanvas" : "none"} 
-              variant="inset" 
-              className="border-r shadow-sm md:max-w-xs w-full relative"
-            >
-              <SidebarContent>
+        {isMobile ? (
+          <div className="space-y-4">
+            {transportOptions.map((transport) => (
+              <div key={transport.id} className="bg-white rounded-lg shadow-md overflow-hidden">
+                <div 
+                  className={cn(
+                    "p-4 cursor-pointer flex items-center gap-3",
+                    activeTransportId === transport.id && "bg-blue-50"
+                  )}
+                  onClick={() => setActiveTransportId(transport.id!)}
+                >
+                  <div className={cn(
+                    "text-xl",
+                    activeTransportId === transport.id ? "text-blue-600" : "text-gray-500"
+                  )}>
+                    {transport.icon}
+                  </div>
+                  <span className="font-medium">{transport.title}</span>
+                </div>
+                
+                {activeTransportId === transport.id && (
+                  <TransportDetailPanel transport={transport} />
+                )}
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="bg-white rounded-lg shadow-md overflow-hidden flex">
+            <div className="w-1/3 max-w-xs border-r">
+              <div className="sticky top-4 max-h-[80vh] overflow-y-auto p-2">
                 <div className="px-3 py-2">
                   <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider">
                     Quick Navigation
                   </h3>
                 </div>
-                <SidebarMenu className="overflow-y-auto">
+                <div className="space-y-1">
                   {transportOptions.map((transport) => (
-                    <SidebarMenuItem key={transport.id}>
-                      <SidebarMenuButton
-                        isActive={activeTransportId === transport.id}
-                        className="flex items-center gap-3" 
-                        onClick={() => handleTransportSelect(transport)}
-                      >
-                        <div className={cn(
-                          "text-xl",
-                          activeTransportId === transport.id ? "text-blue-600" : "text-gray-500"
-                        )}>
-                          {transport.icon}
-                        </div>
-                        <span>{transport.title}</span>
-                      </SidebarMenuButton>
-                    </SidebarMenuItem>
+                    <button
+                      key={transport.id}
+                      className={cn(
+                        "flex items-center gap-3 w-full text-left px-3 py-2 rounded-md",
+                        activeTransportId === transport.id 
+                          ? "bg-blue-50 text-blue-600" 
+                          : "hover:bg-gray-100"
+                      )}
+                      onClick={() => handleTransportSelect(transport)}
+                    >
+                      <div className={cn(
+                        "text-xl",
+                        activeTransportId === transport.id ? "text-blue-600" : "text-gray-500"
+                      )}>
+                        {transport.icon}
+                      </div>
+                      <span>{transport.title}</span>
+                    </button>
                   ))}
-                </SidebarMenu>
-              </SidebarContent>
-            </Sidebar>
-
-            {/* Main content area with transport details */}
-            <div 
-              ref={contentRef}
-              className="flex-1 overflow-hidden bg-white"
-            >
-              {/* Mobile sidebar trigger */}
-              {isMobile && (
-                <div className="flex items-center justify-between p-4 border-b">
-                  <h3 className="font-medium">Transportation Options</h3>
-                  <SidebarTrigger className="text-gray-500" />
                 </div>
-              )}
-              
-              {/* Transport detail panel */}
+              </div>
+            </div>
+            
+            <div className="flex-1">
               {selectedTransport && (
                 <TransportDetailPanel transport={selectedTransport} />
               )}
             </div>
           </div>
-        </SidebarProvider>
-
-        {/* Display all transport cards in vertical layout for mobile and smaller screens */}
-        <div className="mt-10 md:hidden space-y-4">
-          {transportOptions.map((transport) => (
-            <TransportCard
-              key={transport.id}
-              title={transport.title}
-              icon={transport.icon}
-              description={transport.shortDescription}
-              isActive={activeTransportId === transport.id}
-              onClick={() => handleTransportSelect(transport)}
-              className="shadow-sm"
-            />
-          ))}
-        </div>
+        )}
       </div>
     </section>
   );
