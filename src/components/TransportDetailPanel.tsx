@@ -13,7 +13,7 @@ const TransportDetailPanel: React.FC<TransportDetailPanelProps> = ({ transport }
   const isMobile = useIsMobile();
 
   return (
-    <div className="p-4 md:p-6 h-full overflow-y-auto">
+    <div className="p-4 md:p-6 h-full">
       <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-6">
         <div className="flex items-center gap-3">
           <div className="text-3xl md:text-4xl text-blue-500">
@@ -29,7 +29,7 @@ const TransportDetailPanel: React.FC<TransportDetailPanelProps> = ({ transport }
         {transport.referralLink && (
           <Button 
             variant="outline" 
-            className="w-full md:w-auto md:ml-auto" 
+            className="w-full md:w-auto" 
             onClick={() => window.open(transport.referralLink, '_blank')}
           >
             Book Now <ExternalLink className="ml-1 h-4 w-4" />
