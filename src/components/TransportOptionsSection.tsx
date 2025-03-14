@@ -1,8 +1,21 @@
 
-import React, { useState } from 'react';
-import { Bus, Car, Bike, MapPin, Plane, DollarSign } from 'lucide-react';
+import React, { useState, useRef, useEffect } from 'react';
+import { Bus, Car, Bike, MapPin, Plane, DollarSign, ArrowRight, Compass } from 'lucide-react';
+import { cn } from "@/lib/utils";
+import { Button } from '@/components/ui/button';
+import { 
+  Sidebar, 
+  SidebarContent, 
+  SidebarProvider,
+  SidebarMenu,
+  SidebarMenuItem,
+  SidebarMenuButton,
+  SidebarTrigger
+} from '@/components/ui/sidebar';
 import TransportCard from '@/components/TransportCard';
-import TransportDetailsDialog, { TransportDetails } from '@/components/TransportDetailsDialog';
+import { TransportDetails } from '@/components/TransportDetailsDialog';
+import { useIsMobile } from '@/hooks/use-mobile';
+import TransportDetailPanel from '@/components/TransportDetailPanel';
 
 interface TransportOptionsSectionProps {
   sectionRef: React.RefObject<HTMLDivElement>;
@@ -10,10 +23,13 @@ interface TransportOptionsSectionProps {
 
 const TransportOptionsSection = ({ sectionRef }: TransportOptionsSectionProps) => {
   const [selectedTransport, setSelectedTransport] = useState<TransportDetails | null>(null);
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [activeTransportId, setActiveTransportId] = useState<number>(0);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
 
   const transportOptions: TransportDetails[] = [
     {
+      id: 0,
       title: "Metro Bus & Light Rail",
       icon: <Bus />,
       howToUse: [
@@ -27,9 +43,12 @@ const TransportOptionsSection = ({ sectionRef }: TransportOptionsSectionProps) =
         "Day pass: $3.00",
         "Student discount: 50% off with verified student status"
       ],
-      discounts: "Apply for a METRO Student Q-Card online or at the METRO RideStore with your student ID to receive 50% off all rides."
+      discounts: "Apply for a METRO Student Q-Card online or at the METRO RideStore with your student ID to receive 50% off all rides.",
+      referralLink: "https://www.ridemetro.org/Pages/index.aspx",
+      shortDescription: "Houston's public transit system offering buses and light rail with affordable fares and student discounts."
     },
     {
+      id: 1,
       title: "Uber & Lyft",
       icon: <Car />,
       howToUse: [
@@ -44,9 +63,12 @@ const TransportOptionsSection = ({ sectionRef }: TransportOptionsSectionProps) =
         "Per mile: $0.90-1.30",
         "Average ride within Houston: $10-25"
       ],
-      discounts: "Use code 'STUDENT10' for $10 off your first Uber ride. Lyft occasionally offers student promotions through campus partnerships."
+      discounts: "Use code 'STUDENT10' for $10 off your first Uber ride. Lyft occasionally offers student promotions through campus partnerships.",
+      referralLink: "https://www.uber.com/us/en/ride/",
+      shortDescription: "On-demand ridesharing services available 24/7 through smartphone apps with flexible pricing."
     },
     {
+      id: 2,
       title: "Intercity Buses",
       icon: <Bus />,
       howToUse: [
@@ -63,9 +85,37 @@ const TransportOptionsSection = ({ sectionRef }: TransportOptionsSectionProps) =
         { name: "Houston to Dallas", duration: "4 hours", cost: "$20-35" },
         { name: "Houston to San Antonio", duration: "3.5 hours", cost: "$15-30" }
       ],
-      tips: "Book 2-3 weeks in advance for the best rates. Most buses depart from the Greyhound station downtown or from the Northwest Transit Center."
+      tips: "Book 2-3 weeks in advance for the best rates. Most buses depart from the Greyhound station downtown or from the Northwest Transit Center.",
+      referralLink: "https://www.greyhound.com/",
+      shortDescription: "Affordable bus services connecting Houston to major Texas cities and beyond."
     },
     {
+      id: 3,
+      title: "Hitch",
+      icon: <Compass />,
+      howToUse: [
+        "Download the Hitch app and create an account",
+        "Book your trip in advance (at least 24 hours recommended)",
+        "Meet at the designated pickup location",
+        "Show your reservation to the driver"
+      ],
+      costs: [
+        "Houston to Austin: $25-45",
+        "Houston to Dallas: $30-50",
+        "Houston to College Station: $20-35"
+      ],
+      routes: [
+        { name: "Houston to Austin", duration: "2.5-3 hours", cost: "$25-45" },
+        { name: "Houston to Dallas", duration: "3.5-4 hours", cost: "$30-50" },
+        { name: "Houston to College Station", duration: "1.5 hours", cost: "$20-35" }
+      ],
+      tips: "Hitch offers door-to-door ridesharing for intercity travel. They pick you up from your location and drop you at your destination city.",
+      discounts: "First-time riders can use promotional codes for discounts, typically available on their website or social media.",
+      referralLink: "https://ridehitch.com/",
+      shortDescription: "Innovative ridesharing service for intercity travel with door-to-door service at competitive prices."
+    },
+    {
+      id: 4,
       title: "Car Rentals",
       icon: <Car />,
       howToUse: [
@@ -79,9 +129,12 @@ const TransportOptionsSection = ({ sectionRef }: TransportOptionsSectionProps) =
         "SUVs: $45-60 per day",
         "Additional insurance: $10-25 per day"
       ],
-      discounts: "Many rental companies offer student discounts of 10-25% with a valid student ID. USAA and AAA members may receive additional discounts."
+      discounts: "Many rental companies offer student discounts of 10-25% with a valid student ID. USAA and AAA members may receive additional discounts.",
+      referralLink: "https://www.enterprise.com/en/home.html",
+      shortDescription: "Flexible car rental options for short or long-term use with various vehicle types available."
     },
     {
+      id: 5,
       title: "Biking & Walking",
       icon: <Bike />,
       howToUse: [
@@ -94,9 +147,12 @@ const TransportOptionsSection = ({ sectionRef }: TransportOptionsSectionProps) =
         "Monthly pass: $13",
         "Student annual pass: $60"
       ],
-      tips: "Houston's bike trails are expanding, with over 345 miles of interconnected bikeways. The Brays Bayou Greenway and Buffalo Bayou Park offer scenic rides separated from traffic."
+      tips: "Houston's bike trails are expanding, with over 345 miles of interconnected bikeways. The Brays Bayou Greenway and Buffalo Bayou Park offer scenic rides separated from traffic.",
+      referralLink: "https://houston.bcycle.com/",
+      shortDescription: "Eco-friendly transportation option with growing bike infrastructure and affordable bike-sharing programs."
     },
     {
+      id: 6,
       title: "Airport Pickup Services",
       icon: <Plane />,
       howToUse: [
@@ -108,25 +164,34 @@ const TransportOptionsSection = ({ sectionRef }: TransportOptionsSectionProps) =
         "University shuttle: $15-25 one-way",
         "Private shuttle services: $25-40 one-way"
       ],
-      discounts: "Many universities offer free or discounted airport pickup services for new international students at the beginning of each semester."
+      discounts: "Many universities offer free or discounted airport pickup services for new international students at the beginning of each semester.",
+      referralLink: "https://www.supershuttle.com/",
+      shortDescription: "Convenient transportation options specifically for airport transfers with university-specific services."
     }
   ];
 
-  const handleOpenDetails = (transport: TransportDetails) => {
-    setSelectedTransport(transport);
-    setIsDialogOpen(true);
-  };
+  useEffect(() => {
+    if (transportOptions.length > 0 && !selectedTransport) {
+      setSelectedTransport(transportOptions[0]);
+    }
+  }, [transportOptions]);
 
-  const handleCloseDialog = () => {
-    setIsDialogOpen(false);
+  const handleTransportSelect = (transport: TransportDetails) => {
+    setSelectedTransport(transport);
+    setActiveTransportId(transport.id!);
+    
+    // Scroll to the content area on mobile
+    if (isMobile && contentRef.current) {
+      contentRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
     <section 
       ref={sectionRef} 
-      className="py-20 px-4 sm:px-6 lg:px-8 scroll-mt-6 bg-gradient-to-b from-white to-softBlue/20"
+      className="py-16 px-4 sm:px-6 lg:px-8 scroll-mt-6 bg-gradient-to-b from-white to-blue-50"
     >
-      <div className="container mx-auto max-w-6xl">
+      <div className="container mx-auto max-w-7xl">
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-4">
           Transportation Options
         </h2>
@@ -134,34 +199,59 @@ const TransportOptionsSection = ({ sectionRef }: TransportOptionsSectionProps) =
           Discover the most convenient ways to get around Houston as a student
         </p>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {transportOptions.map((transport, index) => (
-            <TransportCard 
-              key={index}
-              title={transport.title} 
-              icon={transport.icon}
-              description={index === 2 ? "Perfect for weekend trips to nearby cities" : 
-                          index === 1 ? "Convenient ridesharing apps available 24/7" : undefined}
-              className={`animate-fade-in bg-white hover:bg-blue-50 border-t-4 ${
-                index === 0 ? "border-blue-500" :
-                index === 1 ? "border-purple-500" :
-                index === 2 ? "border-green-500" :
-                index === 3 ? "border-orange-500" :
-                index === 4 ? "border-teal-500" :
-                "border-red-500"
-              }`}
-              style={{ animationDelay: `${0.1 * (index + 1)}s` }}
-              onClick={() => handleOpenDetails(transport)}
-            />
-          ))}
-        </div>
-      </div>
+        <SidebarProvider defaultOpen={!isMobile}>
+          <div className="min-h-full flex w-full bg-white rounded-lg shadow-md overflow-hidden">
+            {/* Sidebar with transportation options list */}
+            <Sidebar collapsible={isMobile ? "offcanvas" : "none"} variant="inset" className="border-r shadow-sm">
+              <SidebarContent>
+                <div className="px-3 py-2">
+                  <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider">
+                    Quick Navigation
+                  </h3>
+                </div>
+                <SidebarMenu>
+                  {transportOptions.map((transport) => (
+                    <SidebarMenuItem key={transport.id}>
+                      <SidebarMenuButton
+                        isActive={activeTransportId === transport.id}
+                        className="flex items-center gap-3" 
+                        onClick={() => handleTransportSelect(transport)}
+                      >
+                        <div className={cn(
+                          "text-xl",
+                          activeTransportId === transport.id ? "text-blue-600" : "text-gray-500"
+                        )}>
+                          {transport.icon}
+                        </div>
+                        <span>{transport.title}</span>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  ))}
+                </SidebarMenu>
+              </SidebarContent>
+            </Sidebar>
 
-      <TransportDetailsDialog 
-        isOpen={isDialogOpen}
-        onClose={handleCloseDialog}
-        transport={selectedTransport}
-      />
+            {/* Main content area with transport details */}
+            <div 
+              ref={contentRef}
+              className="flex-1 overflow-hidden bg-white"
+            >
+              {/* Mobile sidebar trigger */}
+              {isMobile && (
+                <div className="flex items-center justify-between p-4 border-b">
+                  <h3 className="font-medium">Transportation Options</h3>
+                  <SidebarTrigger className="text-gray-500" />
+                </div>
+              )}
+              
+              {/* Transport detail panel */}
+              {selectedTransport && (
+                <TransportDetailPanel transport={selectedTransport} />
+              )}
+            </div>
+          </div>
+        </SidebarProvider>
+      </div>
     </section>
   );
 };

@@ -8,9 +8,10 @@ import {
   DialogDescription
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import { X } from 'lucide-react';
+import { X, ExternalLink } from 'lucide-react';
 
 export interface TransportDetails {
+  id?: number;
   title: string;
   icon: React.ReactNode;
   howToUse?: string[];
@@ -18,6 +19,8 @@ export interface TransportDetails {
   discounts?: string;
   tips?: string;
   routes?: { name: string; duration: string; cost: string }[];
+  referralLink?: string;
+  shortDescription?: string;
 }
 
 interface TransportDetailsDialogProps {
@@ -41,7 +44,14 @@ const TransportDetailsDialog = ({
             <div className="text-3xl text-blue-500">
               {transport.icon}
             </div>
-            <DialogTitle className="text-xl">{transport.title}</DialogTitle>
+            <div>
+              <DialogTitle className="text-xl">{transport.title}</DialogTitle>
+              {transport.shortDescription && (
+                <DialogDescription>
+                  {transport.shortDescription}
+                </DialogDescription>
+              )}
+            </div>
           </div>
           <Button 
             variant="ghost" 
@@ -104,6 +114,17 @@ const TransportDetailsDialog = ({
             <div className="space-y-2">
               <h4 className="font-semibold text-lg">Tips:</h4>
               <p>{transport.tips}</p>
+            </div>
+          )}
+          
+          {transport.referralLink && (
+            <div className="pt-2">
+              <Button 
+                className="w-full" 
+                onClick={() => window.open(transport.referralLink, '_blank')}
+              >
+                Book Now <ExternalLink className="ml-1 h-4 w-4" />
+              </Button>
             </div>
           )}
         </div>
