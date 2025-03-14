@@ -1,11 +1,21 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Bus, Car, Bike, MapPin, Plane, DollarSign, ArrowRight, Compass } from 'lucide-react';
+
+import React, { useState, useRef } from 'react';
+import { Bus, Car, Bike, Plane, Compass } from 'lucide-react';
 import { cn } from "@/lib/utils";
-import { Button } from '@/components/ui/button';
-import TransportCard from '@/components/TransportCard';
+import TransportDetailPanel from '@/components/TransportDetailPanel';
 import { TransportDetails } from '@/components/TransportDetailsDialog';
 import { useIsMobile } from '@/hooks/use-mobile';
-import TransportDetailPanel from '@/components/TransportDetailPanel';
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  SidebarProvider
+} from "@/components/ui/sidebar";
 
 interface TransportOptionsSectionProps {
   sectionRef: React.RefObject<HTMLDivElement>;
@@ -13,7 +23,6 @@ interface TransportOptionsSectionProps {
 
 const TransportOptionsSection = ({ sectionRef }: TransportOptionsSectionProps) => {
   const [activeTransportId, setActiveTransportId] = useState<number>(0);
-  const contentRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
 
   const transportOptions: TransportDetails[] = [
@@ -171,7 +180,7 @@ const TransportOptionsSection = ({ sectionRef }: TransportOptionsSectionProps) =
         <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
           Discover the most convenient ways to get around Houston as a student
         </p>
-        
+
         {isMobile ? (
           <div className="space-y-4">
             {transportOptions.map((transport) => (
@@ -199,50 +208,51 @@ const TransportOptionsSection = ({ sectionRef }: TransportOptionsSectionProps) =
             ))}
           </div>
         ) : (
-          <div className="space-y-6">
-            <div className="px-3 py-2 bg-blue-50 rounded-lg mb-4">
-              <h3 className="text-sm font-semibold text-blue-700 uppercase tracking-wider">
-                Transport Navigation
-              </h3>
-              <div className="flex flex-wrap gap-2 mt-2">
+          <SidebarProvider defaultOpen={true}>
+            <div className="flex w-full">
+              <Sidebar variant="sidebar" collapsible="icon">
+                <SidebarContent>
+                  <SidebarGroup>
+                    <SidebarGroupLabel>Transport Navigation</SidebarGroupLabel>
+                    <SidebarGroupContent>
+                      <SidebarMenu>
+                        {transportOptions.map((transport) => (
+                          <SidebarMenuItem key={transport.id}>
+                            <SidebarMenuButton 
+                              isActive={transport.id === activeTransportId}
+                              onClick={() => {
+                                setActiveTransportId(transport.id!);
+                                document.getElementById(`transport-${transport.id}`)?.scrollIntoView({ 
+                                  behavior: 'smooth',
+                                  block: 'start'
+                                });
+                              }}
+                              tooltip={transport.title}
+                            >
+                              {transport.icon}
+                              <span>{transport.title}</span>
+                            </SidebarMenuButton>
+                          </SidebarMenuItem>
+                        ))}
+                      </SidebarMenu>
+                    </SidebarGroupContent>
+                  </SidebarGroup>
+                </SidebarContent>
+              </Sidebar>
+              
+              <div className="flex-1 space-y-8 pl-4">
                 {transportOptions.map((transport) => (
-                  <button
-                    key={transport.id}
-                    className={cn(
-                      "px-3 py-1 rounded-full text-sm flex items-center gap-1",
-                      transport.id === activeTransportId 
-                        ? "bg-blue-500 text-white" 
-                        : "bg-white text-gray-700 hover:bg-gray-100"
-                    )}
-                    onClick={() => {
-                      setActiveTransportId(transport.id!);
-                      document.getElementById(`transport-${transport.id}`)?.scrollIntoView({ 
-                        behavior: 'smooth',
-                        block: 'start'
-                      });
-                    }}
+                  <div 
+                    id={`transport-${transport.id}`}
+                    key={transport.id} 
+                    className="bg-white rounded-lg shadow-md overflow-hidden"
                   >
-                    <div className="text-sm">
-                      {transport.icon}
-                    </div>
-                    <span>{transport.title}</span>
-                  </button>
+                    <TransportDetailPanel transport={transport} />
+                  </div>
                 ))}
               </div>
             </div>
-            
-            <div className="space-y-8">
-              {transportOptions.map((transport) => (
-                <div 
-                  id={`transport-${transport.id}`}
-                  key={transport.id} 
-                  className="bg-white rounded-lg shadow-md overflow-hidden"
-                >
-                  <TransportDetailPanel transport={transport} />
-                </div>
-              ))}
-            </div>
-          </div>
+          </SidebarProvider>
         )}
       </div>
     </section>
