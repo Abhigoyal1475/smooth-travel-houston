@@ -3,7 +3,6 @@ import React from 'react';
 import { ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { TransportDetails } from '@/components/TransportDetailsDialog';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 interface TransportDetailPanelProps {
   transport: TransportDetails;
@@ -31,56 +30,50 @@ const TransportDetailPanel: React.FC<TransportDetailPanelProps> = ({ transport }
         )}
       </div>
 
-      <Tabs defaultValue="details" className="w-full">
-        <TabsList className="w-full justify-start mb-4">
-          <TabsTrigger value="details">Details</TabsTrigger>
-          <TabsTrigger value="howToUse">How to Use</TabsTrigger>
-          {transport.costs && <TabsTrigger value="costs">Costs</TabsTrigger>}
-          {transport.routes && <TabsTrigger value="routes">Routes</TabsTrigger>}
-        </TabsList>
+      <div className="space-y-8">
+        {/* Details Section */}
+        {transport.discounts && (
+          <div className="bg-blue-50 p-4 rounded-lg">
+            <h3 className="font-semibold text-blue-700 mb-2">Student Discounts</h3>
+            <p className="text-blue-800">{transport.discounts}</p>
+          </div>
+        )}
         
-        <TabsContent value="details" className="space-y-4">
-          {transport.discounts && (
-            <div className="bg-blue-50 p-4 rounded-lg">
-              <h3 className="font-semibold text-blue-700 mb-2">Student Discounts</h3>
-              <p className="text-blue-800">{transport.discounts}</p>
-            </div>
-          )}
-          
-          {transport.tips && (
-            <div className="mt-6">
-              <h3 className="font-semibold text-gray-700 mb-2">Tips</h3>
-              <p className="text-gray-600">{transport.tips}</p>
-            </div>
-          )}
-        </TabsContent>
+        {transport.tips && (
+          <div>
+            <h3 className="font-semibold text-gray-700 mb-2">Tips</h3>
+            <p className="text-gray-600">{transport.tips}</p>
+          </div>
+        )}
         
-        <TabsContent value="howToUse" className="space-y-4">
-          {transport.howToUse && (
-            <div>
-              <ol className="list-decimal pl-5 space-y-2">
-                {transport.howToUse.map((step, i) => (
-                  <li key={i} className="text-gray-700">{step}</li>
-                ))}
-              </ol>
-            </div>
-          )}
-        </TabsContent>
+        {/* How To Use Section */}
+        {transport.howToUse && (
+          <div>
+            <h3 className="font-semibold text-gray-700 text-lg mb-3">How to Use</h3>
+            <ol className="list-decimal pl-5 space-y-2">
+              {transport.howToUse.map((step, i) => (
+                <li key={i} className="text-gray-700">{step}</li>
+              ))}
+            </ol>
+          </div>
+        )}
         
-        <TabsContent value="costs" className="space-y-4">
-          {transport.costs && (
-            <div>
-              <ul className="list-disc pl-5 space-y-2">
-                {transport.costs.map((cost, i) => (
-                  <li key={i} className="text-gray-700">{cost}</li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </TabsContent>
+        {/* Costs Section */}
+        {transport.costs && (
+          <div>
+            <h3 className="font-semibold text-gray-700 text-lg mb-3">Costs</h3>
+            <ul className="list-disc pl-5 space-y-2">
+              {transport.costs.map((cost, i) => (
+                <li key={i} className="text-gray-700">{cost}</li>
+              ))}
+            </ul>
+          </div>
+        )}
         
-        <TabsContent value="routes" className="space-y-4">
-          {transport.routes && (
+        {/* Routes Section */}
+        {transport.routes && (
+          <div>
+            <h3 className="font-semibold text-gray-700 text-lg mb-3">Routes</h3>
             <div className="bg-gray-50 rounded-lg">
               {transport.routes.map((route, i) => (
                 <div key={i} className="p-4 border-b last:border-b-0 flex justify-between items-center">
@@ -92,9 +85,9 @@ const TransportDetailPanel: React.FC<TransportDetailPanelProps> = ({ transport }
                 </div>
               ))}
             </div>
-          )}
-        </TabsContent>
-      </Tabs>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

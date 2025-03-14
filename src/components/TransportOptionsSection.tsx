@@ -200,16 +200,20 @@ const TransportOptionsSection = ({ sectionRef }: TransportOptionsSectionProps) =
         </p>
         
         <SidebarProvider defaultOpen={!isMobile}>
-          <div className="min-h-full flex w-full bg-white rounded-lg shadow-md overflow-hidden">
+          <div className="min-h-full flex flex-col md:flex-row w-full bg-white rounded-lg shadow-md overflow-hidden">
             {/* Sidebar with transportation options list */}
-            <Sidebar collapsible={isMobile ? "offcanvas" : "none"} variant="inset" className="border-r shadow-sm">
+            <Sidebar 
+              collapsible={isMobile ? "offcanvas" : "none"} 
+              variant="inset" 
+              className="border-r shadow-sm md:max-w-xs w-full relative"
+            >
               <SidebarContent>
                 <div className="px-3 py-2">
                   <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider">
                     Quick Navigation
                   </h3>
                 </div>
-                <SidebarMenu>
+                <SidebarMenu className="overflow-y-auto">
                   {transportOptions.map((transport) => (
                     <SidebarMenuItem key={transport.id}>
                       <SidebarMenuButton
@@ -251,6 +255,21 @@ const TransportOptionsSection = ({ sectionRef }: TransportOptionsSectionProps) =
             </div>
           </div>
         </SidebarProvider>
+
+        {/* Display all transport cards in vertical layout for mobile and smaller screens */}
+        <div className="mt-10 md:hidden space-y-4">
+          {transportOptions.map((transport) => (
+            <TransportCard
+              key={transport.id}
+              title={transport.title}
+              icon={transport.icon}
+              description={transport.shortDescription}
+              isActive={activeTransportId === transport.id}
+              onClick={() => handleTransportSelect(transport)}
+              className="shadow-sm"
+            />
+          ))}
+        </div>
       </div>
     </section>
   );
