@@ -220,16 +220,16 @@ const TransportOptionsSection = ({ sectionRef }: TransportOptionsSectionProps) =
             ))}
           </div>
         ) : (
-          <div className="flex flex-col space-y-8">
-            {/* Non-sticky sidebar at the top */}
-            <div className="w-full bg-white rounded-lg shadow-md p-4 mb-4">
+          <div className="flex flex-row space-x-6">
+            {/* Sticky sidebar on the left */}
+            <div className="w-64 sticky top-4 self-start bg-white rounded-lg shadow-md p-4 h-fit">
               <h3 className="font-medium text-gray-700 mb-4">Quick Navigation</h3>
-              <div className="flex overflow-x-auto pb-2 space-x-2">
+              <div className="flex flex-col space-y-2">
                 {transportOptions.map((transport) => (
                   <button
                     key={transport.id}
                     className={cn(
-                      "flex items-center gap-2 px-3 py-2 rounded-md whitespace-nowrap",
+                      "flex items-center gap-2 px-3 py-2 rounded-md",
                       activeTransportId === transport.id 
                         ? "bg-blue-100 text-blue-700" 
                         : "text-gray-600 hover:bg-gray-100"
@@ -250,7 +250,7 @@ const TransportOptionsSection = ({ sectionRef }: TransportOptionsSectionProps) =
             </div>
             
             {/* Vertical listing of all transport options */}
-            <div className="space-y-8">
+            <div className="flex-1 space-y-8">
               {transportOptions.map((transport, index) => (
                 <div 
                   key={transport.id} 
