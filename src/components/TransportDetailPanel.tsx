@@ -2,6 +2,7 @@
 import React from 'react';
 import { TransportDetails } from '@/components/TransportDetailsDialog';
 import { useIsMobile } from '@/hooks/use-mobile';
+import CTAButton from '@/components/CTAButton';
 
 interface TransportDetailPanelProps {
   transport: TransportDetails;
@@ -19,19 +20,113 @@ const TransportDetailPanel: React.FC<TransportDetailPanelProps> = ({ transport }
           </div>
           <div>
             <h1 className="text-xl md:text-2xl font-bold text-gray-800">{transport.title}</h1>
-            {transport.shortDescription && (
-              <p className="text-sm md:text-base text-gray-600 mt-1">{transport.shortDescription}</p>
-            )}
           </div>
         </div>
       </div>
 
+      {/* Description with key points */}
+      {transport.shortDescription && (
+        <div className="mb-6 bg-blue-50 p-4 rounded-lg">
+          <h3 className="font-semibold text-blue-700 mb-2">About this service</h3>
+          <p className="text-sm md:text-base text-blue-800 mb-2">{transport.shortDescription}</p>
+          
+          {/* Additional key points for specific services */}
+          {transport.title === "Metro Bus & Light Rail" && (
+            <ul className="list-disc pl-5 space-y-1 text-sm md:text-base text-blue-800">
+              <li>Extensive network covering all major areas in Houston</li>
+              <li>Student-friendly with special discounts</li>
+              <li>Eco-friendly transportation option</li>
+              <li><a href="/blog/uoh-metro-card" className="text-blue-600 underline">University of Houston students can get their METRO card for free - Read our guide</a></li>
+            </ul>
+          )}
+          
+          {transport.title === "Uber & Lyft" && (
+            <ul className="list-disc pl-5 space-y-1 text-sm md:text-base text-blue-800">
+              <li>On-demand rides available 24/7</li>
+              <li>Multiple vehicle options to fit your budget</li>
+              <li>Cashless payment through the app</li>
+              <li>Door-to-door service with real-time tracking</li>
+            </ul>
+          )}
+          
+          {transport.title === "Intercity Buses" && (
+            <ul className="list-disc pl-5 space-y-1 text-sm md:text-base text-blue-800">
+              <li>Affordable way to travel between major Texas cities</li>
+              <li>Free WiFi and power outlets on most buses</li>
+              <li>Available services include: FlixBus, Greyhound, and Megabus</li>
+              <li>Book in advance for the best deals</li>
+            </ul>
+          )}
+          
+          {transport.title === "Hitch" && (
+            <ul className="list-disc pl-5 space-y-1 text-sm md:text-base text-blue-800">
+              <li>Door-to-door intercity rideshare service</li>
+              <li>More comfortable than standard buses</li>
+              <li>Convenient pickup and drop-off locations</li>
+              <li>Use my code for extra benefits and I'll earn a small commission too!</li>
+            </ul>
+          )}
+          
+          {transport.title === "Car Rentals" && (
+            <ul className="list-disc pl-5 space-y-1 text-sm md:text-base text-blue-800">
+              <li>Complete freedom to explore at your own pace</li>
+              <li>Various vehicle types to suit your needs</li>
+              <li>Compare prices across major rental companies</li>
+              <li>More economical than rideshare for longer trips</li>
+            </ul>
+          )}
+          
+          {transport.title === "Biking & Walking" && (
+            <ul className="list-disc pl-5 space-y-1 text-sm md:text-base text-blue-800">
+              <li>Healthiest transportation option</li>
+              <li>Zero cost (walking) or low cost (bike sharing)</li>
+              <li>Houston has over 345 miles of bike trails</li>
+              <li>Great for short trips around campus</li>
+            </ul>
+          )}
+          
+          {transport.title === "Airport Pickup Services" && (
+            <ul className="list-disc pl-5 space-y-1 text-sm md:text-base text-blue-800">
+              <li>Stress-free arrival experience</li>
+              <li>Fixed pricing with no surprises</li>
+              <li>Professional drivers familiar with the airport</li>
+              <li>Book in advance for peace of mind</li>
+            </ul>
+          )}
+        </div>
+      )}
+
       <div className="space-y-6 md:space-y-8">
-        {/* Discounts Section */}
+        {/* Discounts Section with Personal Referral */}
         {transport.discounts && (
           <div className="bg-blue-50 p-3 md:p-4 rounded-lg">
             <h3 className="font-semibold text-blue-700 mb-2">Student Discounts & Referrals</h3>
             <p className="text-sm md:text-base text-blue-800">{transport.discounts}</p>
+            
+            {/* Special CTAs for specific services */}
+            {transport.title === "Car Rentals" && (
+              <div className="mt-3">
+                <CTAButton 
+                  href="/car-rental-deals" 
+                  variant="primary" 
+                  className="w-full md:w-auto"
+                >
+                  Book cheaper than Uber/Lyft
+                </CTAButton>
+              </div>
+            )}
+            
+            {transport.title === "Airport Pickup Services" && (
+              <div className="mt-3">
+                <CTAButton 
+                  href="/airport-pickup" 
+                  variant="primary" 
+                  className="w-full md:w-auto"
+                >
+                  Book an airport ride
+                </CTAButton>
+              </div>
+            )}
           </div>
         )}
         
