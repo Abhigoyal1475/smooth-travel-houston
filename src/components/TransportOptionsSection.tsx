@@ -1,10 +1,11 @@
 
 import React, { useState, useRef } from 'react';
-import { Bus, Car, Bike, Plane, Compass } from 'lucide-react';
+import { Bus, Car, Bike, Plane, Compass, Menu } from 'lucide-react';
 import { cn } from "@/lib/utils";
 import TransportDetailPanel from '@/components/TransportDetailPanel';
 import { TransportDetails } from '@/components/TransportDetailsDialog';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 interface TransportOptionsSectionProps {
   sectionRef: React.RefObject<HTMLDivElement>;
@@ -177,6 +178,33 @@ const TransportOptionsSection = ({ sectionRef }: TransportOptionsSectionProps) =
     }, 100);
   };
 
+  const MobileNavMenu = () => (
+    <div className="space-y-2">
+      {transportOptions.map((transport) => (
+        <button
+          key={transport.id}
+          className={cn(
+            "flex items-center w-full gap-2 px-3 py-2 rounded-md",
+            activeTransportId === transport.id 
+              ? "bg-blue-100 text-blue-700" 
+              : "text-gray-600 hover:bg-gray-100"
+          )}
+          onClick={() => {
+            handleMobileTransportClick(transport.id!);
+            // Close the sheet after selecting an option
+            const closeButton = document.querySelector('[data-radix-collection-item]');
+            if (closeButton && closeButton instanceof HTMLElement) {
+              closeButton.click();
+            }
+          }}
+        >
+          <span className="text-lg">{transport.icon}</span>
+          <span className="text-sm font-medium">{transport.title}</span>
+        </button>
+      ))}
+    </div>
+  );
+
   return (
     <section 
       ref={sectionRef} 
@@ -193,6 +221,23 @@ const TransportOptionsSection = ({ sectionRef }: TransportOptionsSectionProps) =
 
         {isMobile ? (
           <div className="space-y-4">
+            {/* Hamburger menu for mobile */}
+            <div className="fixed top-4 right-4 z-50">
+              <Sheet>
+                <SheetTrigger asChild>
+                  <button className="p-2 bg-white rounded-full shadow-md">
+                    <Menu className="h-6 w-6 text-blue-600" />
+                  </button>
+                </SheetTrigger>
+                <SheetContent side="right" className="w-[260px] sm:w-[300px]">
+                  <div className="py-6">
+                    <h3 className="font-medium text-gray-800 mb-4">Quick Navigation</h3>
+                    <MobileNavMenu />
+                  </div>
+                </SheetContent>
+              </Sheet>
+            </div>
+            
             {transportOptions.map((transport) => (
               <div key={transport.id} className="bg-white rounded-lg shadow-md overflow-hidden">
                 <div 
