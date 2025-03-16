@@ -1,7 +1,5 @@
 
 import React from 'react';
-import { ExternalLink } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import { TransportDetails } from '@/components/TransportDetailsDialog';
 import { useIsMobile } from '@/hooks/use-mobile';
 
@@ -26,22 +24,13 @@ const TransportDetailPanel: React.FC<TransportDetailPanelProps> = ({ transport }
             )}
           </div>
         </div>
-        {transport.referralLink && (
-          <Button 
-            variant="outline" 
-            className="w-full md:w-auto" 
-            onClick={() => window.open(transport.referralLink, '_blank')}
-          >
-            Book Now <ExternalLink className="ml-1 h-4 w-4" />
-          </Button>
-        )}
       </div>
 
       <div className="space-y-6 md:space-y-8">
         {/* Discounts Section */}
         {transport.discounts && (
           <div className="bg-blue-50 p-3 md:p-4 rounded-lg">
-            <h3 className="font-semibold text-blue-700 mb-2">Student Discounts</h3>
+            <h3 className="font-semibold text-blue-700 mb-2">Student Discounts & Referrals</h3>
             <p className="text-sm md:text-base text-blue-800">{transport.discounts}</p>
           </div>
         )}
