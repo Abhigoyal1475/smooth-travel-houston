@@ -26,14 +26,14 @@ const MobileNavMenu: React.FC<MobileNavMenuProps> = ({
   };
 
   return (
-    <div className="fixed top-4 right-4 z-50">
+    <div className="fixed top-4 left-4 z-50">
       <Sheet>
         <SheetTrigger asChild>
           <button className="p-2 bg-white rounded-full shadow-md">
             <Menu className="h-6 w-6 text-blue-600" />
           </button>
         </SheetTrigger>
-        <SheetContent side="right" className="w-[260px] sm:w-[300px]">
+        <SheetContent side="left" className="w-[260px] sm:w-[300px]">
           <div className="py-6">
             <h3 className="font-medium text-gray-800 mb-4">Quick Navigation</h3>
             <div className="space-y-2">

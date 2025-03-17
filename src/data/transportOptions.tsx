@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Bus, Car, Bike, Plane, Compass } from 'lucide-react';
+import { Bus, Car, Bike, Plane, Compass, MapPin, University, Phone } from 'lucide-react';
 import { TransportDetails } from '@/components/TransportDetailsDialog';
 
 export const transportOptionsData: TransportDetails[] = [
@@ -68,6 +68,30 @@ export const transportOptionsData: TransportDetails[] = [
   },
   {
     id: 3,
+    title: "Cougar Ride",
+    icon: <University />,
+    howToUse: [
+      "Download the Cougar Ride app (search 'TapRide' in app stores)",
+      "Log in with your UH email and password",
+      "Request a ride through the app",
+      "Wait at your pickup location",
+      "Show your UH ID to the driver"
+    ],
+    costs: [
+      "Free for UH students, faculty, and staff"
+    ],
+    discounts: "Cougar Ride is already completely free for UH students, faculty, and staff with a valid UH ID card. No discounts needed!",
+    tips: "Cougar Ride service can get busy during peak hours, so request your ride in advance. If you need to cancel a ride, please do so promptly to free up the service for other students.",
+    shortDescription: "Cougar Ride is a free transportation service exclusively for University of Houston students, faculty, and staff that provides safe rides around campus areas during evening and nighttime hours.",
+    referralLink: "https://www.uh.edu/parking/cougar-ride/",
+    routes: [
+      { name: "Service Area", duration: "Campus & surrounding areas", cost: "FREE" },
+      { name: "Operating Hours (Sun-Wed)", duration: "7:00 PM to 1:00 AM", cost: "FREE" },
+      { name: "Operating Hours (Thu-Sat)", duration: "7:00 PM to 3:00 AM", cost: "FREE" }
+    ]
+  },
+  {
+    id: 4,
     title: "Hitch",
     icon: <Compass />,
     howToUse: [
@@ -92,7 +116,7 @@ export const transportOptionsData: TransportDetails[] = [
     shortDescription: "Hitch offers a comfortable middle ground between buses and rideshares for intercity travel. It's a door-to-door service that's more personalized than buses but more affordable than taking an Uber between cities."
   },
   {
-    id: 4,
+    id: 5,
     title: "Car Rentals",
     icon: <Car />,
     howToUse: [
@@ -111,7 +135,7 @@ export const transportOptionsData: TransportDetails[] = [
     shortDescription: "Need wheels for a weekend trip or to move your stuff? Renting a car gives you ultimate flexibility for exploring Houston and beyond. Most companies only require you to be 21+ with a valid license and credit card."
   },
   {
-    id: 5,
+    id: 6,
     title: "Biking & Walking",
     icon: <Bike />,
     howToUse: [
@@ -130,7 +154,7 @@ export const transportOptionsData: TransportDetails[] = [
     shortDescription: "For shorter trips around campus and nearby neighborhoods, biking or walking might be your best bet. It's free (or very cheap with bike sharing), good exercise, and often faster than driving in congested areas during peak hours."
   },
   {
-    id: 6,
+    id: 7,
     title: "Airport Pickup Services",
     icon: <Plane />,
     howToUse: [

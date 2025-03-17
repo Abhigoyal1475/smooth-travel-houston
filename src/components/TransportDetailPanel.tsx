@@ -3,6 +3,7 @@ import React from 'react';
 import { TransportDetails } from '@/components/TransportDetailsDialog';
 import { useIsMobile } from '@/hooks/use-mobile';
 import CTAButton from '@/components/CTAButton';
+import { MapPin, Phone } from 'lucide-react';
 
 interface TransportDetailPanelProps {
   transport: TransportDetails;
@@ -58,6 +59,27 @@ const TransportDetailPanel: React.FC<TransportDetailPanelProps> = ({ transport }
             </ul>
           )}
           
+          {transport.title === "Cougar Ride" && (
+            <ul className="list-disc pl-5 space-y-1 text-sm md:text-base text-blue-800">
+              <li>Free evening transportation service for UH students, faculty, and staff</li>
+              <li>Available Sunday-Wednesday: 7:00 PM to 1:00 AM</li>
+              <li>Extended hours Thursday-Saturday: 7:00 PM to 3:00 AM</li>
+              <li>Covers the UH campus and surrounding areas</li>
+              <li>
+                <div className="flex items-center mt-2 gap-2">
+                  <Phone className="h-4 w-4 text-blue-700" />
+                  <span>For immediate assistance: (713) 743-3333</span>
+                </div>
+              </li>
+              <li>
+                <div className="flex items-center mt-2 gap-2">
+                  <MapPin className="h-4 w-4 text-blue-700" />
+                  <span>Parking & Transportation Services Office: Stadium Parking Garage, 3874 Holman St, Suite 102</span>
+                </div>
+              </li>
+            </ul>
+          )}
+          
           {transport.title === "Hitch" && (
             <ul className="list-disc pl-5 space-y-1 text-sm md:text-base text-blue-800">
               <li>Door-to-door intercity rideshare service</li>
@@ -97,6 +119,34 @@ const TransportDetailPanel: React.FC<TransportDetailPanelProps> = ({ transport }
       )}
 
       <div className="space-y-6 md:space-y-8">
+        {/* Special Cougar Ride Section */}
+        {transport.title === "Cougar Ride" && (
+          <div className="bg-red-50 p-4 rounded-lg border border-red-100">
+            <h3 className="font-semibold text-red-700 mb-2">Important Information</h3>
+            <div className="space-y-3">
+              <p className="text-sm md:text-base text-red-800">
+                Cougar Ride is a transportation service provided exclusively for University of Houston students, faculty, and staff. 
+                You must have a valid UH ID to use this service.
+              </p>
+              <div className="flex flex-col space-y-2">
+                <h4 className="font-medium text-red-700">Service Boundaries:</h4>
+                <p className="text-sm md:text-base text-red-800">
+                  North: I-45 (North Freeway); South: Old Spanish Trail; East: I-45 (Gulf Freeway); West: HWY 288 (South Freeway)
+                </p>
+              </div>
+              <div className="mt-3">
+                <CTAButton 
+                  href="https://www.uh.edu/parking/cougar-ride/" 
+                  variant="primary" 
+                  className="w-full md:w-auto"
+                >
+                  Visit Official Cougar Ride Website
+                </CTAButton>
+              </div>
+            </div>
+          </div>
+        )}
+        
         {/* Discounts Section with Personal Referral */}
         {transport.discounts && (
           <div className="bg-blue-50 p-3 md:p-4 rounded-lg">
