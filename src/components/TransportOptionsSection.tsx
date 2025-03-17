@@ -43,7 +43,7 @@ const TransportOptionsSection = ({ sectionRef }: TransportOptionsSectionProps) =
   return (
     <section 
       ref={sectionRef} 
-      className="py-16 px-4 sm:px-6 lg:px-8 scroll-mt-6 bg-gradient-to-b from-white to-blue-50"
+      className="py-16 pt-24 px-4 sm:px-6 lg:px-8 scroll-mt-16 bg-gradient-to-b from-white to-blue-50"
       id="transport-options"
     >
       <div className="container mx-auto max-w-7xl">

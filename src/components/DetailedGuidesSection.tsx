@@ -3,9 +3,16 @@ import React from 'react';
 import { Bus, Car } from 'lucide-react';
 import TransportSection from '@/components/TransportSection';
 
-const DetailedGuidesSection = () => {
+interface DetailedGuidesSectionProps {
+  sectionRef?: React.RefObject<HTMLDivElement>;
+}
+
+const DetailedGuidesSection = ({ sectionRef }: DetailedGuidesSectionProps) => {
   return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
+    <section 
+      ref={sectionRef}
+      className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50 scroll-mt-16"
+    >
       <div className="container mx-auto max-w-4xl">
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-12">
           Detailed Transportation Guides
@@ -33,26 +40,25 @@ const DetailedGuidesSection = () => {
           </div>
         </TransportSection>
         
-        <TransportSection title="Uber & Lyft" icon={<Car />} className="mt-6">
+        <TransportSection title="UH COAST Program" icon={<Car />} className="mt-6">
           <div className="space-y-4">
             <h4 className="font-semibold text-lg">How to Use:</h4>
             <ol className="list-decimal pl-5 space-y-2">
-              <li>Download the Uber or Lyft app</li>
-              <li>Create an account with your .edu email for student benefits</li>
-              <li>Enter your destination and choose a ride type</li>
-              <li>Pay through the app (add a payment method first)</li>
+              <li>Check eligibility on the UH Parking website</li>
+              <li>Apply through AccessUH under the COAST tab</li>
+              <li>Receive your COAST Q Card at the beginning of the semester</li>
+              <li>Use your card for unlimited rides on all METRO services</li>
             </ol>
             
-            <h4 className="font-semibold text-lg mt-6">Costs:</h4>
+            <h4 className="font-semibold text-lg mt-6">Eligibility:</h4>
             <ul className="list-disc pl-5 space-y-2">
-              <li>Base fare: $1-2</li>
-              <li>Per minute: $0.15-0.20</li>
-              <li>Per mile: $0.90-1.30</li>
-              <li>Average ride within Houston: $10-25</li>
+              <li>Must be enrolled in classes at UH main campus</li>
+              <li>Must live off-campus outside the COAST boundaries</li>
+              <li>North of I-610, East of Hardy Toll Road, South of Brays Bayou, West of I-45</li>
             </ul>
             
-            <h4 className="font-semibold text-lg mt-6">Student Discounts:</h4>
-            <p>Use code "STUDENT10" for $10 off your first Uber ride. Lyft occasionally offers student promotions through campus partnerships.</p>
+            <h4 className="font-semibold text-lg mt-6">Benefits:</h4>
+            <p>Receive $27 per month in transit funds, which covers most commuting needs for the semester. Valid on all METRO services including bus, rail, and Park & Ride.</p>
           </div>
         </TransportSection>
         
