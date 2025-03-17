@@ -31,6 +31,19 @@ const TransportDetailPanel: React.FC<TransportDetailPanelProps> = ({ transport }
           <h3 className="font-semibold text-blue-700 mb-2">About this service</h3>
           <p className="text-sm md:text-base text-blue-800 mb-2">{transport.shortDescription}</p>
           
+          {/* COAST eligibility section */}
+          {transport.title === "COAST Card (UH Students)" && (
+            <div className="mt-3">
+              <h4 className="font-semibold text-blue-700 mb-2">Eligibility Requirements:</h4>
+              <ul className="list-disc pl-5 space-y-1 text-sm md:text-base text-blue-800">
+                <li>Must be enrolled in at least 9 hours of Face-to-Face or Hyflex classes</li>
+                <li>For carpools, every member of the group must be taking at least 9 hours</li>
+                <li>Cannot be a residential student living on campus</li>
+                <li>Must live outside the COAST boundaries: North of I-610, East of Hardy Toll Road, South of Brays Bayou, and West of I-45</li>
+              </ul>
+            </div>
+          )}
+          
           {/* Additional key points for specific services */}
           {transport.title === "Metro Bus & Light Rail" && (
             <ul className="list-disc pl-5 space-y-1 text-sm md:text-base text-blue-800">

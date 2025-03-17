@@ -8,7 +8,6 @@ import FaqSection from '@/components/FaqSection';
 import CtaSection from '@/components/CtaSection';
 import FooterSection from '@/components/FooterSection';
 import GoogleAdBanner from '@/components/GoogleAdBanner';
-import TopNavbar from '@/components/transport/TopNavbar';
 
 const Index = () => {
   const transportOptionsRef = useRef<HTMLDivElement>(null);
@@ -22,13 +21,6 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-      <TopNavbar 
-        transportOptionsRef={transportOptionsRef}
-        guidesRef={guidesRef}
-        comparisonRef={comparisonRef}
-        faqRef={faqRef}
-      />
-      
       <HeroSection onExploreClick={scrollToTransportOptions} />
       
       {/* Ad banner after hero section */}
