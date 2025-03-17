@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Phone, MapPin } from 'lucide-react';
 import { TransportDetails } from '@/components/TransportDetailsDialog';
@@ -44,8 +45,10 @@ const CoastEligibility = () => (
 const MetroBusKeyPoints = () => (
   <ul className="list-disc pl-5 space-y-1 text-sm md:text-base text-blue-800">
     <li>Extensive network covering all major areas in Houston</li>
-    <li>Student-friendly with special discounts</li>
+    <li>University of Houston students who meet COAST eligibility receive a free METRO Q Card</li>
+    <li>All other UH students can get a METRO Student Q Card for 50% off regular fares</li>
     <li>Eco-friendly transportation option</li>
+    <li><a href="https://www.ridemetro.org" className="text-blue-600 underline" target="_blank" rel="noopener noreferrer">Visit ridemetro.org for more information</a></li>
     <li><a href="/blog/uoh-metro-card" className="text-blue-600 underline">University of Houston students can get their METRO card for free - Read our guide</a></li>
   </ul>
 );
