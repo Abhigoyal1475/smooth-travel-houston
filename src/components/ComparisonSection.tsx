@@ -2,14 +2,11 @@
 import React from 'react';
 import ComparisonTable from '@/components/ComparisonTable';
 
-interface TransportComparison {
-  mode: string;
-  cost: string;
-  convenience: string;
-  bestUseCase: string;
+interface ComparisonSectionProps {
+  sectionRef?: React.RefObject<HTMLDivElement>;
 }
 
-const ComparisonSection = () => {
+const ComparisonSection = ({ sectionRef }: ComparisonSectionProps) => {
   const comparisonData = [
     {
       mode: 'Metro Bus & Light Rail',
@@ -44,7 +41,7 @@ const ComparisonSection = () => {
   ];
 
   return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-blue-50 to-purple-50">
+    <section ref={sectionRef} className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-blue-50 to-purple-50 scroll-mt-16">
       <div className="container mx-auto max-w-6xl">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-gray-800 mb-4">

@@ -2,7 +2,11 @@
 import React from 'react';
 import FaqItem from '@/components/FaqItem';
 
-const FaqSection = () => {
+interface FaqSectionProps {
+  sectionRef?: React.RefObject<HTMLDivElement>;
+}
+
+const FaqSection = ({ sectionRef }: FaqSectionProps) => {
   const faqData = [
     {
       question: 'How do I get a Student Metro Card?',
@@ -27,7 +31,10 @@ const FaqSection = () => {
   ];
 
   return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-softBlue">
+    <section 
+      ref={sectionRef} 
+      className="py-16 px-4 sm:px-6 lg:px-8 bg-softBlue scroll-mt-16"
+    >
       <div className="container mx-auto max-w-3xl">
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-12">
           Frequently Asked Questions
