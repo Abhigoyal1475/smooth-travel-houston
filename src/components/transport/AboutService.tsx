@@ -1,5 +1,5 @@
-
 import React from 'react';
+import { Phone, MapPin } from 'lucide-react';
 import { TransportDetails } from '@/components/TransportDetailsDialog';
 
 interface AboutServiceProps {
