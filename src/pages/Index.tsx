@@ -2,7 +2,7 @@
 import React, { useRef } from 'react';
 import HeroSection from '@/components/HeroSection';
 import TransportOptionsSection from '@/components/TransportOptionsSection';
-import DetailedGuidesSection from '@/components/DetailedGuidesSection';
+import BestTransportSection from '@/components/BestTransportSection';
 import ComparisonSection from '@/components/ComparisonSection';
 import FaqSection from '@/components/FaqSection';
 import CtaSection from '@/components/CtaSection';
@@ -11,7 +11,7 @@ import GoogleAdBanner from '@/components/GoogleAdBanner';
 
 const Index = () => {
   const transportOptionsRef = useRef<HTMLDivElement>(null);
-  const guidesRef = useRef<HTMLDivElement>(null);
+  const bestTransportRef = useRef<HTMLDivElement>(null);
   const comparisonRef = useRef<HTMLDivElement>(null);
   const faqRef = useRef<HTMLDivElement>(null);
 
@@ -28,7 +28,7 @@ const Index = () => {
       
       <div id="content" className="relative z-10">
         <TransportOptionsSection sectionRef={transportOptionsRef} />
-        <DetailedGuidesSection sectionRef={guidesRef} />
+        <BestTransportSection sectionRef={bestTransportRef} />
         
         {/* Ad banner between content sections */}
         <GoogleAdBanner className="bg-blue-50" />
