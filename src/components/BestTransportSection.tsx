@@ -45,7 +45,7 @@ const BestTransportSection: React.FC<BestTransportSectionProps> = ({ sectionRef 
         "Great when carrying heavy items or groceries"
       ],
       color: "bg-blue-100 text-blue-700",
-      imageSrc: "https://images.unsplash.com/photo-1573497019418-b400bb3ab074?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+      imageSrc: "https://images.unsplash.com/photo-1515348152804-fe1eb1cf4901?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
     },
     {
       title: "Long-Distance Travel",
