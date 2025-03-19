@@ -12,6 +12,7 @@ interface TransportOption {
   icon: React.ReactNode;
   description: string;
   best: string;
+  points: string[];
   color: string;
 }
 
@@ -22,6 +23,12 @@ const BestTransportSection: React.FC<BestTransportSectionProps> = ({ sectionRef 
       icon: <DollarSign className="w-8 h-8" />,
       description: "Metro Bus & Light Rail",
       best: "Students get 50% off with METRO Student Q Card or free with COAST eligibility",
+      points: [
+        "Perfect if you're on a tight budget",
+        "Ideal when you have plenty of time and no hurry",
+        "Good for regular commuting on established routes",
+        "Environmentally friendly option"
+      ],
       color: "bg-green-100 text-green-700"
     },
     {
@@ -29,6 +36,12 @@ const BestTransportSection: React.FC<BestTransportSectionProps> = ({ sectionRef 
       icon: <Clock className="w-8 h-8" />,
       description: "Uber & Lyft",
       best: "Available 24/7, door-to-door service with real-time tracking",
+      points: [
+        "Best for reaching destinations timely",
+        "Ideal for small distances where bus/metro doesn't go",
+        "Perfect for late night or early morning travel",
+        "Great when carrying heavy items or groceries"
+      ],
       color: "bg-blue-100 text-blue-700"
     },
     {
@@ -36,6 +49,12 @@ const BestTransportSection: React.FC<BestTransportSectionProps> = ({ sectionRef 
       icon: <Bus className="w-8 h-8" />,
       description: "Intercity Buses",
       best: "FlixBus, Greyhound, and Megabus for affordable travel between cities",
+      points: [
+        "Best for budget-friendly intercity travel",
+        "Good option when traveling to major stations/stops",
+        "Perfect for weekend trips to nearby cities",
+        "Most buses offer WiFi and power outlets for studying"
+      ],
       color: "bg-purple-100 text-purple-700"
     },
     {
@@ -43,6 +62,12 @@ const BestTransportSection: React.FC<BestTransportSectionProps> = ({ sectionRef 
       icon: <Plane className="w-8 h-8" />,
       description: "Shared Shuttle or Uber",
       best: "Fixed pricing with professional drivers familiar with the airport",
+      points: [
+        "Use Uber/Lyft for flexibility and convenience",
+        "Fill out airport shuttle form for even cheaper rides",
+        "Book in advance for best rates on shuttle services",
+        "Perfect for those with heavy luggage"
+      ],
       color: "bg-orange-100 text-orange-700"
     }
   ];
@@ -77,7 +102,13 @@ const BestTransportSection: React.FC<BestTransportSectionProps> = ({ sectionRef 
                 <h3 className="font-bold text-lg">{option.title}</h3>
               </div>
               <p className="text-lg font-semibold mb-1">{option.description}</p>
-              <p className="text-sm opacity-90">{option.best}</p>
+              <p className="text-sm opacity-90 mb-3">{option.best}</p>
+              
+              <ul className="text-sm list-disc pl-5 space-y-1">
+                {option.points.map((point, i) => (
+                  <li key={i}>{point}</li>
+                ))}
+              </ul>
             </div>
           ))}
         </div>
