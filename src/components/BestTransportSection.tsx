@@ -14,6 +14,7 @@ interface TransportOption {
   best: string;
   points: string[];
   color: string;
+  imageSrc: string;
 }
 
 const BestTransportSection: React.FC<BestTransportSectionProps> = ({ sectionRef }) => {
@@ -29,7 +30,8 @@ const BestTransportSection: React.FC<BestTransportSectionProps> = ({ sectionRef 
         "Good for regular commuting on established routes",
         "Environmentally friendly option"
       ],
-      color: "bg-green-100 text-green-700"
+      color: "bg-green-100 text-green-700",
+      imageSrc: "https://images.unsplash.com/photo-1581262192242-04d3cf1ffd12?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
     },
     {
       title: "Most Convenient",
@@ -42,7 +44,8 @@ const BestTransportSection: React.FC<BestTransportSectionProps> = ({ sectionRef 
         "Perfect for late night or early morning travel",
         "Great when carrying heavy items or groceries"
       ],
-      color: "bg-blue-100 text-blue-700"
+      color: "bg-blue-100 text-blue-700",
+      imageSrc: "https://images.unsplash.com/photo-1573497019418-b400bb3ab074?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
     },
     {
       title: "Long-Distance Travel",
@@ -55,7 +58,8 @@ const BestTransportSection: React.FC<BestTransportSectionProps> = ({ sectionRef 
         "Perfect for weekend trips to nearby cities",
         "Most buses offer WiFi and power outlets for studying"
       ],
-      color: "bg-purple-100 text-purple-700"
+      color: "bg-purple-100 text-purple-700",
+      imageSrc: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
     },
     {
       title: "Airport Transfers",
@@ -68,7 +72,8 @@ const BestTransportSection: React.FC<BestTransportSectionProps> = ({ sectionRef 
         "Book in advance for best rates on shuttle services",
         "Perfect for those with heavy luggage"
       ],
-      color: "bg-orange-100 text-orange-700"
+      color: "bg-orange-100 text-orange-700",
+      imageSrc: "https://images.unsplash.com/photo-1575029644286-efb9039cac46?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
     }
   ];
 
@@ -101,14 +106,26 @@ const BestTransportSection: React.FC<BestTransportSectionProps> = ({ sectionRef 
                 <div className="bg-white p-2 rounded-full mr-3">{option.icon}</div>
                 <h3 className="font-bold text-lg">{option.title}</h3>
               </div>
-              <p className="text-lg font-semibold mb-1">{option.description}</p>
-              <p className="text-sm opacity-90 mb-3">{option.best}</p>
               
-              <ul className="text-sm list-disc pl-5 space-y-1">
-                {option.points.map((point, i) => (
-                  <li key={i}>{point}</li>
-                ))}
-              </ul>
+              <div className="flex flex-col md:flex-row gap-4 mb-3">
+                <div className="md:w-1/3">
+                  <img 
+                    src={option.imageSrc} 
+                    alt={option.description}
+                    className="w-full h-32 object-cover rounded-md shadow-sm"
+                  />
+                </div>
+                <div className="md:w-2/3">
+                  <p className="text-lg font-semibold mb-1">{option.description}</p>
+                  <p className="text-sm opacity-90 mb-3">{option.best}</p>
+                  
+                  <ul className="text-sm list-disc pl-5 space-y-1">
+                    {option.points.map((point, i) => (
+                      <li key={i}>{point}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
             </div>
           ))}
         </div>
