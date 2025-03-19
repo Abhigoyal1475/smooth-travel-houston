@@ -1,7 +1,8 @@
 
 import React from 'react';
-import { Phone, MapPin } from 'lucide-react';
+import { Phone, MapPin, Download, ExternalLink } from 'lucide-react';
 import { TransportDetails } from '@/components/TransportDetailsDialog';
+import { Button } from '@/components/ui/button';
 
 interface AboutServiceProps {
   transport: TransportDetails;
@@ -60,6 +61,30 @@ const RideshareKeyPoints = () => (
     <li>Multiple vehicle options to fit your budget</li>
     <li>Cashless payment through the app</li>
     <li>Door-to-door service with real-time tracking</li>
+    <li className="mt-3">
+      <div className="flex flex-wrap gap-3 mt-2">
+        <a 
+          href="https://uber.com/app" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1 bg-black text-white px-3 py-1.5 rounded-md text-sm font-medium hover:bg-gray-800"
+        >
+          <Download className="h-4 w-4" />
+          <span>Uber App</span>
+          <span className="ml-1 text-xs bg-green-500 text-white px-1.5 py-0.5 rounded-full">$10 bonus</span>
+        </a>
+        <a 
+          href="https://lyft.com/app" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1 bg-purple-600 text-white px-3 py-1.5 rounded-md text-sm font-medium hover:bg-purple-700"
+        >
+          <Download className="h-4 w-4" />
+          <span>Lyft App</span>
+          <span className="ml-1 text-xs bg-green-500 text-white px-1.5 py-0.5 rounded-full">$10 bonus</span>
+        </a>
+      </div>
+    </li>
   </ul>
 );
 

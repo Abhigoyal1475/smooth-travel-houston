@@ -31,30 +31,6 @@ export const transportOptionsData: TransportDetails[] = [
   },
   {
     id: 1,
-    title: "Cougar Ride",
-    icon: <University />,
-    howToUse: [
-      "Download the Cougar Ride app (search 'TapRide' in app stores)",
-      "Log in with your UH email and password",
-      "Request a ride through the app",
-      "Wait at your pickup location",
-      "Show your UH ID to the driver"
-    ],
-    costs: [
-      "Free for UH students, faculty, and staff"
-    ],
-    discounts: "Cougar Ride is already completely free for UH students, faculty, and staff with a valid UH ID card. No discounts needed!",
-    tips: "Cougar Ride service can get busy during peak hours, so request your ride in advance. If you need to cancel a ride, please do so promptly to free up the service for other students.",
-    shortDescription: "Cougar Ride is a free transportation service exclusively for University of Houston students, faculty, and staff that provides safe rides around campus areas during evening and nighttime hours.",
-    referralLink: "https://www.uh.edu/parking/cougar-ride/",
-    routes: [
-      { name: "Service Area", duration: "Campus & surrounding areas", cost: "FREE" },
-      { name: "Operating Hours (Sun-Wed)", duration: "7:00 PM to 1:00 AM", cost: "FREE" },
-      { name: "Operating Hours (Thu-Sat)", duration: "7:00 PM to 3:00 AM", cost: "FREE" }
-    ]
-  },
-  {
-    id: 2,
     title: "Metro Bus & Light Rail",
     icon: <Bus />,
     howToUse: [
@@ -73,7 +49,7 @@ export const transportOptionsData: TransportDetails[] = [
     shortDescription: "Get around Houston affordably with the public transit system. The bus and light rail network covers most of the city and is perfect for students on a budget. Avoid parking hassles and traffic while helping the environment!"
   },
   {
-    id: 3,
+    id: 2,
     title: "Uber & Lyft",
     icon: <Car />,
     howToUse: [
@@ -93,7 +69,7 @@ export const transportOptionsData: TransportDetails[] = [
     shortDescription: "Need a quick ride at odd hours or to places not served by public transit? Ridesharing services like Uber and Lyft are available 24/7 and can get you exactly where you need to go with just a few taps on your phone."
   },
   {
-    id: 4,
+    id: 3,
     title: "Intercity Buses",
     icon: <Bus />,
     howToUse: [
@@ -116,7 +92,7 @@ export const transportOptionsData: TransportDetails[] = [
     shortDescription: "Need to visit other Texas cities on a student budget? Intercity buses are often the most affordable option with regular routes to all major Texas destinations. Perfect for weekend trips or visiting friends at other universities!"
   },
   {
-    id: 5,
+    id: 4,
     title: "Hitch",
     icon: <Compass />,
     howToUse: [
@@ -141,7 +117,7 @@ export const transportOptionsData: TransportDetails[] = [
     shortDescription: "Hitch offers a comfortable middle ground between buses and rideshares for intercity travel. It's a door-to-door service that's more personalized than buses but more affordable than taking an Uber between cities."
   },
   {
-    id: 6,
+    id: 5,
     title: "Car Rentals",
     icon: <Car />,
     howToUse: [
@@ -160,7 +136,7 @@ export const transportOptionsData: TransportDetails[] = [
     shortDescription: "Need wheels for a weekend trip or to move your stuff? Renting a car gives you ultimate flexibility for exploring Houston and beyond. Most companies only require you to be 21+ with a valid license and credit card."
   },
   {
-    id: 7,
+    id: 6,
     title: "Airport Pickup Services",
     icon: <Plane />,
     howToUse: [
@@ -175,5 +151,29 @@ export const transportOptionsData: TransportDetails[] = [
     discounts: "Many universities offer free or discounted airport pickup services for new international students at the beginning of each semester. Book through my platform for exclusive student rates and I'll earn a small commission to support this guide.",
     referralLink: "https://www.supershuttle.com/",
     shortDescription: "Just landed in Houston? Airport pickup services take the stress out of navigating a new city when you first arrive. They're especially useful for international students or anyone with lots of luggage."
+  },
+  {
+    id: 7,
+    title: "Cougar Ride",
+    icon: <University />,
+    howToUse: [
+      "Download the Cougar Ride app (search 'TapRide' in app stores)",
+      "Log in with your UH email and password",
+      "Request a ride through the app",
+      "Wait at your pickup location",
+      "Show your UH ID to the driver"
+    ],
+    costs: [
+      "Free for UH students, faculty, and staff"
+    ],
+    discounts: "Cougar Ride is already completely free for UH students, faculty, and staff with a valid UH ID card. No discounts needed!",
+    tips: "Cougar Ride service can get busy during peak hours, so request your ride in advance. If you need to cancel a ride, please do so promptly to free up the service for other students.",
+    shortDescription: "Cougar Ride is a free transportation service exclusively for University of Houston students, faculty, and staff that provides safe rides around campus areas during evening and nighttime hours.",
+    referralLink: "https://www.uh.edu/parking/cougar-ride/",
+    routes: [
+      { name: "Service Area", duration: "Campus & surrounding areas", cost: "FREE" },
+      { name: "Operating Hours (Sun-Wed)", duration: "7:00 PM to 1:00 AM", cost: "FREE" },
+      { name: "Operating Hours (Thu-Sat)", duration: "7:00 PM to 3:00 AM", cost: "FREE" }
+    ]
   }
 ];
